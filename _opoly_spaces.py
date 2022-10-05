@@ -9,7 +9,10 @@ class Space:
         self.width = width
         self.height = height
         self.color = color
-    
+        self.topleft = ''
+
+
     def draw(self):
         shape = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.topleft = shape.topleft
         visual = pygame.draw.rect(self.display,self.color,shape,3)
