@@ -36,6 +36,7 @@ image_scale(PropertyImages)
 # Scaling Special Spaces
 image_scale(SpecialImages)
 
+prop_image_rotate()
 
 if __name__ == "__main__":
     game_board = GameBoard(display)
@@ -49,29 +50,9 @@ if __name__ == "__main__":
         screen.fill(COLOR_BOARD)
         game_board.draw()
 
-        # Quickly adding the corner images on the board
-        screen.blit(CornerImages["Go"], game_board.objects[20].topleft)
-        screen.blit(CornerImages["GoToJail"], game_board.objects[10].topleft)
-        screen.blit(CornerImages["InJail"], game_board.objects[30].topleft)
-        screen.blit(CornerImages["Parking"], game_board.objects[0].topleft)
-
-        # Quickly adding other images to the board
-        # Community Chests
-        screen.blit(pygame.transform.rotate(SpecialImages["CommunityChest"], 90), game_board.objects[13].topleft)
-        screen.blit(SpecialImages["CommunityChest"], game_board.objects[22].topleft)
-        screen.blit(pygame.transform.rotate(SpecialImages["CommunityChest"], 270), game_board.objects[37].topleft)
-
-        # Chance Spaces
-        screen.blit(SpecialImages["Chance"], game_board.objects[27].topleft)
-        screen.blit(pygame.transform.rotate(SpecialImages["Chance"], 90), game_board.objects[16].topleft)
-        screen.blit(pygame.transform.rotate(SpecialImages["Chance"], 180), game_board.objects[2].topleft)
-
-        # Special Properties / Spots
-        screen.blit(pygame.transform.rotate(PropertyImages["Single"]["WaterWorks"], 180), game_board.objects[8].topleft)
-        screen.blit(pygame.transform.rotate(SpecialImages["Tax"], 90), game_board.objects[18].topleft)
-        screen.blit(pygame.transform.rotate(PropertyImages["Single"]["Electric"], 270), game_board.objects[32].topleft)
-
-        screen.blit(SpecialImages["Logo"], [160, 140])
+        prop_blit_space(screen, game_board)
+        corner_blit(screen, game_board)
+        special_blit(screen, game_board)
 
         pygame.display.update()
     print("END MAIN")
