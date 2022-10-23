@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 import os
 
 pygame.init()  # initializes pygame elements for use
@@ -64,15 +65,23 @@ if __name__ == "__main__":
         pygame.display.update()
 
         for player in players:
+
             if len(players) == 1: # One player remaining
+                print("One player remaining; ending game...")
+                time.sleep(3)
                 pygame.QUIT()
                 break
+
             if player.bankrupt: # Bankruptcy check
                 players.remove(player)
+                print(player.name, "is now bankrupt and out of the game.")
+                time.sleep(3)
                 continue
 
             roll = random.randint(2, 12)
             player.position = (player.position + roll) % len(board_list)
+            print(player.name, "has rolled a", roll)
+            time.sleep(1)
 
             board_list[player.position].action(player) # Space specific action
 
@@ -82,5 +91,7 @@ if __name__ == "__main__":
 
             if player.bankrupt:  # Bankruptcy check
                 players.remove(player)
+                print(player.name, "is now bankrupt and out of the game.")
+                time.sleep(3)
 
     print("END MAIN")
