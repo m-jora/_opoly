@@ -1,9 +1,12 @@
 import pygame
+import random
 import os
 
 pygame.init()  # initializes pygame elements for use
 from _opoly_board import *
 from space_draw import *
+from _opoly_classes import *
+from _opoloy_board_values import *
 
 
 # Window / Screen variables
@@ -39,6 +42,10 @@ image_scale(SpecialImages)
 prop_image_rotate()
 
 if __name__ == "__main__":
+
+    player_list = players()
+    board_list = board()
+
     game_board = GameBoard(display)
     while gameIsRunning:
         for event in pygame.event.get():
@@ -55,4 +62,25 @@ if __name__ == "__main__":
         special_blit(screen, game_board)
 
         pygame.display.update()
+
+        for player in players:
+            if len(players) == 1: # One player remaining
+                pygame.QUIT()
+                break
+            if player.bankrupt: # Bankruptcy check
+                players.remove(player)
+                continue
+
+            roll = random.randint(2, 12)
+            player.position = (player.position + roll) % len(board_list)
+
+            board_list[player.position].action(player) # Space specific action
+
+            # check for passed players
+                # try to steal by default
+            # reset steal chance to 50%
+
+            if player.bankrupt:  # Bankruptcy check
+                players.remove(player)
+
     print("END MAIN")

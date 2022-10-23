@@ -43,7 +43,7 @@ class StreetSpace(Space):
                 print("ACTION: Player must pay rent.")
                 
                 if player.money < self.rent:
-                    player.bankrunpt = True
+                    player.bankrupt = True
                     print("PLAYER " + str(player.id) + " HAS GONE BANKRUPT")
                 else:
                     print("ACTION: Player pays rent.")

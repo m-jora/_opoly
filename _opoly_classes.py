@@ -4,6 +4,7 @@ class Player:
         self.money = 1500
         self.position = 0
         self.jailed = 0
+        self.bankrupt = False
         self.steal_chance = 0.5  # 50% chance default; could be changed
 
     def print_values(self): # Test function for checking values
