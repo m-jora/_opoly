@@ -43,7 +43,7 @@ class StreetSpace(Space):
                 print("ACTION: Player must pay rent.")
                 
                 if player.money < self.rent:
-                    player.bankrunpt = True
+                    player.bankrupt = True
                     print("PLAYER " + str(player.id) + " HAS GONE BANKRUPT")
                 else:
                     print("ACTION: Player pays rent.")
@@ -120,8 +120,7 @@ class TaxSpace(Space):
     def __init__(self,display,x,y,width,height,color,price):
         super().__init__(display,x,y,width,height,color)
         self.owner = None
-        self.cost = cost
-        self.rent = rent
+        self.price = price
     
     def action(self,player):
         print("ACTION: Player landed on a tax space.")
