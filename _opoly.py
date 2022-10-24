@@ -18,7 +18,6 @@ gameIsRunning = True
 # Color constants
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
-# COLOR_BOARD = (148,172,150)
 COLOR_BOARD = (100, 100, 100)
 
 
