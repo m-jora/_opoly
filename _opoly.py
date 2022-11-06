@@ -43,8 +43,8 @@ prop_image_rotate()
 
 if __name__ == "__main__":
 
-    player_list = players()
-    board_list = board()
+    #player_list = players()
+    #board_list = board()
 
     game_board = GameBoard(display)
     while gameIsRunning:
@@ -62,7 +62,8 @@ if __name__ == "__main__":
         special_blit(screen, game_board)
 
         pygame.display.update()
-
+        
+        """
         for player in players:
 
             if len(players) == 1: # One player remaining
@@ -92,5 +93,6 @@ if __name__ == "__main__":
                 players.remove(player)
                 print(player.name, "is now bankrupt and out of the game.")
                 time.sleep(3)
+        """
 
     print("END MAIN")

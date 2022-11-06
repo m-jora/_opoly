@@ -18,7 +18,7 @@ class Space:
         visual = pygame.draw.rect(self.display,self.color,shape,3)
 
 class StreetSpace(Space):
-    def __init__(self,display,x,y,width,height,color,cost,rent):
+    def __init__(self,display,x,y,width,height,color,cost,rent,color_group):
         super().__init__(display,x,y,width,height,color)
         self.owner = None
         self.cost = cost
@@ -84,11 +84,10 @@ class RailroadSpace(Space):
                     
                     
 class UtilitySpace(Space):
-    def __init__(self,display,x,y,width,height,color,cost,rent):
+    def __init__(self,display,x,y,width,height,color,cost):
         super().__init__(display,x,y,width,height,color)
         self.owner = None
         self.cost = cost
-        self.rent = rent
     
     def action(self,player):
         print("ACTION: Player landed on a utility space.")
