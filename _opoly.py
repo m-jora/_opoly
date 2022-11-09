@@ -15,7 +15,7 @@ SCREEN_WIDTH = 1040
 SCREEN_HEIGHT = 1000
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 display = pygame.display.get_surface()
-pygame.display.set_caption("_OPOLY (TITLE PLACEHOLDER)")
+pygame.display.set_caption("Atlantis Monopoly")
 clock = pygame.time.Clock()
 gameIsRunning = True
 
@@ -57,9 +57,9 @@ if __name__ == "__main__":
         screen.fill(COLOR_BOARD)
         game_board.draw()
 
-        prop_blit_space(screen, game_board)
-        corner_blit(screen, game_board)
-        special_blit(screen, game_board)
+        #prop_blit_space(screen, game_board)
+        #corner_blit(screen, game_board)
+        #special_blit(screen, game_board)
 
         pygame.display.update()
         

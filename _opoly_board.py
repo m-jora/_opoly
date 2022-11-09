@@ -16,7 +16,7 @@ SPACE_BORDER_COLOR = (0,0,0)
 DEFAULT_RAILROAD_COST = 200
 DEFAULT_RAILROAD_RENT = 25
 
-#DEFAULT_UTILITY_COST = 150
+DEFAULT_UTILITY_COST = 150
 
 INCOME_TAX_PRICE = 200
 LUXURY_TAX_PRICE = 100
@@ -27,7 +27,7 @@ class GameBoard():
         self.display = display
         self.objects = []
         self.construct_spaces()
-        
+       
     def construct_spaces(self):
         #drawing top spaces
         x = 0
@@ -42,7 +42,7 @@ class GameBoard():
             else:
                 width = NORMAL_SPACE_WIDTH
                 x_increment = NORMAL_SPACE_WIDTH
-            
+           
             if i == 0:
                 space = FreeParkingSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
                 self.objects.append(space)
@@ -80,7 +80,7 @@ class GameBoard():
             #space = Space(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             x += x_increment
-        
+       
         #drawing right spaces
         for i in range(10):
             #print("i = ", i)
@@ -94,8 +94,8 @@ class GameBoard():
             else:
                 height = NORMAL_SPACE_WIDTH
                 y_increment = NORMAL_SPACE_WIDTH
-                
-                
+               
+               
             if i == 0: #11
                 space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 300, 26, "GREEN")
                 self.objects.append(space)
@@ -126,79 +126,80 @@ class GameBoard():
             elif i == 9: #20
                 space = GoSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
                 self.objects.append(space)
-            
+           
             #space = Space(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             y += y_increment
-            
+       
+               
         #drawing bottom spaces
         for i in range(10):
             if i == 0:
                 x -= NORMAL_SPACE_WIDTH
                 width = NORMAL_SPACE_WIDTH
-                x_increment = NORMAL_SPACE_WIDTH
+                x_increment = 0
             elif i == 9:
                 x -= NORMAL_SPACE_WIDTH
                 width = CORNER_SPACE_WIDTH
-                x_increment = 0
+                x_increment = NORMAL_SPACE_WIDTH
             else:
                 width = NORMAL_SPACE_WIDTH
                 x_increment = NORMAL_SPACE_WIDTH
-            
+           
             #space = Space(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             x -= x_increment
-            
+           
             if i == 0: #21
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, DEFAULT_STREET_COST, DEFAULT_STREET_RENT, "BROWN")
+                space = StreetSpace(self.display,x+x_increment,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 60, 6, "BROWN")
                 self.objects.append(space)
             elif i == 1: #22
-                space = CommunitySpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
+                space = CommunitySpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
                 self.objects.append(space)
             elif i == 2: #23
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, DEFAULT_STREET_COST, DEFAULT_STREET_RENT, "BROWN")
+                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 60, 6, "BROWN")
                 self.objects.append(space)
             elif i == 3: #24
-                space = TaxSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, INCOME_TAX_PRICE)
+                space = TaxSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, INCOME_TAX_PRICE)
                 self.objects.append(space)
             elif i == 4: #25
-                space = RailroadSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
+                space = RailroadSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
                 self.objects.append(space)
             elif i == 5: #26
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 100, 10, "LIGHT_BLUE")
+                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 100, 10, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 6: #27
-                space = ChanceSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
+                space = ChanceSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
                 self.objects.append(space)
             elif i == 7: #28
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 120, 12, "LIGHT_BLUE")
+                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 120, 12, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 8: #29
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 100, 10, "LIGHT_BLUE")
+                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 100, 10, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 9: #30
                 space = JailSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
                 self.objects.append(space)
-        
+       
         #drawing left spaces
         for i in range(9):
             #print("i = ", i)
             if i == 0:
                 height = NORMAL_SPACE_WIDTH
-                y -= NORMAL_SPACE_WIDTH
-                y_increment = CORNER_SPACE_WIDTH
+                #y -= NORMAL_SPACE_WIDTH
+                y_increment = 0
             if i == 9:
                 height = CORNER_SPACE_HEIGHT
                 y_increment = 0
             else:
                 height = NORMAL_SPACE_WIDTH
                 y_increment = NORMAL_SPACE_WIDTH
-            
+           
             #space = Space(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             y -= y_increment
-            
-            
+           
+           
             if i == 0: #31
                 space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 140, 14, "PINK")
                 self.objects.append(space)
@@ -226,7 +227,7 @@ class GameBoard():
             elif i == 8: #39
                 space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, 180, 18, "ORANGE")
                 self.objects.append(space)
-    
+   
     def draw(self):
         for object in self.objects:
             object.draw()
