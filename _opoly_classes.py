@@ -57,8 +57,8 @@ class Player:
     """
     
     def draw(self):
-        #self.shape = pygame.Rect(self.x, self.y, self.width, self.height)
-        #visual = pygame.draw.rect(self.display,self.color,self.shape)
+        self.shape = pygame.Rect(self.x, self.y, self.width, self.height)
+        visual = pygame.draw.rect(self.display,(255,255,255),self.shape,2)
         scaled_image = pygame.transform.scale(self.image, (self.width, self.height))
         self.display.blit(scaled_image,(self.x,self.y))
 

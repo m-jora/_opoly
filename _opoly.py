@@ -10,7 +10,7 @@ from _opoly_classes import *
 
 
 # Window / Screen variables
-SECONDARY_SCREEN_WIDTH = 500
+SECONDARY_SCREEN_WIDTH = 700
 SCREEN_WIDTH = 1040+SECONDARY_SCREEN_WIDTH
 SCREEN_HEIGHT = 1000
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),HWSURFACE|DOUBLEBUF|RESIZABLE)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
             
         display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
         pygame.display.update()
-        
+        """
         for player in players:
             if len(players) == 1: # One player remaining
                 print("One player remaining; ending game...")
@@ -104,7 +104,7 @@ if __name__ == "__main__":
             #player.draw()
             clock.tick(0.4)
             game_board.objects[player.position].action(player) # Space specific action
-            
+        
             
 
             # check for passed players
@@ -115,5 +115,5 @@ if __name__ == "__main__":
                 players.remove(player)
                 print(player.name, "is now bankrupt and out of the game.")
                 time.sleep(3)
-
+        """
     print("END MAIN")

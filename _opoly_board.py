@@ -1,7 +1,7 @@
 from _opoly_spaces import *
 
-NORMAL_SPACE_WIDTH = 80 #73.81125
-NORMAL_SPACE_HEIGHT = 140 #126.95535
+NORMAL_SPACE_WIDTH = 90 #73.81125
+NORMAL_SPACE_HEIGHT = 95 #90 #126.95535
 
 CORNER_SPACE_WIDTH = NORMAL_SPACE_WIDTH*2
 CORNER_SPACE_HEIGHT = NORMAL_SPACE_HEIGHT
@@ -299,5 +299,5 @@ class GameBoard():
     def draw(self):
         for object in self.objects:
             object.draw()
-        logo = pygame.transform.scale(SpecialImages["Logo"], (720,720))
-        self.buffer.blit(logo,(160,140))
+        logo = pygame.transform.scale(SpecialImages["Logo"], (810,810))
+        self.buffer.blit(logo,(180,95))
