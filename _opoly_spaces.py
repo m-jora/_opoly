@@ -9,18 +9,17 @@ class Space:
         self.width = width
         self.height = height
         self.color = color
-        self.topleft = ''
         
         self.image = image_data[0]
         self.image_rotation = image_data[1]
         
-        pygame.transform.rotate(self.image, self.image_rotation)
+        self.image = pygame.transform.rotate(self.image, self.image_rotation)
 
     def draw(self):
-        shape = pygame.Rect(self.x, self.y, self.width, self.height)
-        self.topleft = shape.topleft
-        visual = pygame.draw.rect(self.display,self.color,shape,3)
-        pygame.transform.scale(self.image_data[0], self.x, self.y)
+        self.shape = pygame.Rect(self.x, self.y, self.width, self.height)
+        visual = pygame.draw.rect(self.display,self.color,self.shape,3)
+        scaled_image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.display.blit(scaled_image,self.shape)
         
         
         

@@ -57,9 +57,9 @@ if __name__ == "__main__":
         screen.fill(COLOR_BOARD)
         game_board.draw()
 
-        prop_blit_space(screen, game_board)
-        corner_blit(screen, game_board)
-        special_blit(screen, game_board)
+        #prop_blit_space(screen, game_board)
+        #corner_blit(screen, game_board)
+        #special_blit(screen, game_board)
 
         pygame.display.update()
         
