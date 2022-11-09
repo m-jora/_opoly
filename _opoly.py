@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import random
 import time
 import os
@@ -13,8 +14,9 @@ from _opoloy_board_values import *
 # Window / Screen variables
 SCREEN_WIDTH = 1040
 SCREEN_HEIGHT = 1000
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),HWSURFACE|DOUBLEBUF|RESIZABLE)
 display = pygame.display.get_surface()
+buffer = display.copy()
 pygame.display.set_caption("Atlantis Monopoly")
 clock = pygame.time.Clock()
 gameIsRunning = True
@@ -24,29 +26,12 @@ COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_BOARD = (100, 100, 100)
 
-
-# Rotating Corners
-#CornerImages["Parking"] = pygame.transform.rotate(CornerImages["Parking"], 180)
-#CornerImages["GoToJail"] = pygame.transform.rotate(CornerImages["GoToJail"], 90)
-#CornerImages["InJail"] = pygame.transform.rotate(CornerImages["InJail"], 315)
-
-# Scaling Corners
-#image_scale(CornerImages)
-
-# Scaling Regular Spaces
-#image_scale(PropertyImages)
-
-# Scaling Special Spaces
-#image_scale(SpecialImages)
-
-#prop_image_rotate()
-
 if __name__ == "__main__":
 
     #player_list = players()
     #board_list = board()
 
-    game_board = GameBoard(display)
+    game_board = GameBoard(display,buffer)
     while gameIsRunning:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -54,12 +39,9 @@ if __name__ == "__main__":
         # end event handler
 
         # Drawing objects (ORDER MATTERS)
-        screen.fill(COLOR_BOARD)
+        #screen.fill(COLOR_BOARD)
+        buffer.fill(COLOR_BOARD)
         game_board.draw()
-
-        #prop_blit_space(screen, game_board)
-        #corner_blit(screen, game_board)
-        #special_blit(screen, game_board)
 
         pygame.display.update()
         

@@ -82,20 +82,6 @@ PropertyImages = {
     }
 }
 
-Space_Nums = {
-    "Blue": [17, 19],
-    "Brown": [21, 23],
-    "Green": [11, 12, 14],
-    "Orange": [39, 38, 36],
-    "Pink": [31, 33, 34],
-    "Red": [1 ,3, 4],
-    "Teal": [29, 28, 26],
-    "Yellow": [9, 7, 6],
-    "Go": 20,
-    "GoToJail": 10,
-    "InJail": 30,
-    "Parking": 0,
-}
 
 SpecialImages = {
     "CommunityChest": pygame.image.load("DESIGN_ASSETS/SPECIAL/communityChest.png"),
@@ -106,8 +92,9 @@ SpecialImages = {
 
 
 class GameBoard():
-    def __init__(self,display):
+    def __init__(self,display,buffer):
         self.display = display
+        self.buffer = buffer
         self.objects = []
         self.construct_spaces()
        
@@ -127,40 +114,40 @@ class GameBoard():
                 x_increment = NORMAL_SPACE_WIDTH
            
             if i == 0: #0
-                space = FreeParkingSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR,(CornerImages["Parking"],0))
+                space = FreeParkingSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR,(CornerImages["Parking"],0))
                 self.objects.append(space)
             elif i == 1: #1
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Ave"],0), 340 , 20,"RED")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Ave"],0), 340 , 20,"RED")
                 self.objects.append(space)
             elif i == 2: #2
-                space = ChanceSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (SpecialImages["Chance"],0))
+                space = ChanceSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (SpecialImages["Chance"],0))
                 self.objects.append(space)
             elif i == 3: #3
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Street"],0), 220, 18,"RED")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Street"],0), 220, 18,"RED")
                 self.objects.append(space)
             elif i == 4: #4
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Drive"],0), 220, 18,"RED")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Red"]["Drive"],0), 220, 18,"RED")
                 self.objects.append(space)
             elif i == 5: #5
-                space = RailroadSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Railroad"]["Atlantis"],0), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
+                space = RailroadSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Railroad"]["Atlantis"],0), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
                 self.objects.append(space)
             elif i == 6: #6
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["SharkBay"],0), 260, 22,"YELLOW")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["SharkBay"],0), 260, 22,"YELLOW")
                 self.objects.append(space)
             elif i == 7: #7
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["ReefStreet"],0), 260, 22,"YELLOW")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["ReefStreet"],0), 260, 22,"YELLOW")
                 self.objects.append(space)
             elif i == 8: #8
-                space = UtilitySpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Single"]["WaterWorks"],0),DEFAULT_UTILITY_COST)
+                space = UtilitySpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Single"]["WaterWorks"],0),DEFAULT_UTILITY_COST)
                 self.objects.append(space)
             elif i == 9: #9
-                space = StreetSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["Grave"],0), 280, 24,"YELLOW")
+                space = StreetSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (PropertyImages["Yellow"]["Grave"],0), 280, 24,"YELLOW")
                 self.objects.append(space)
             elif i == 10: #10
-                space = GoToJailSpace(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (CornerImages["GoToJail"],0))
+                space = GoToJailSpace(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR, (CornerImages["GoToJail"],0))
                 self.objects.append(space)
 
-            #space = Space(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
+            #space = Space(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             x += x_increment
        
@@ -180,34 +167,34 @@ class GameBoard():
                
                
             if i == 0: #11
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Plaza"], 270), 300, 26, "GREEN")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Plaza"], 270), 300, 26, "GREEN")
                 self.objects.append(space)
             elif i == 1: #12
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Jellyfish"], 270), 300, 26, "GREEN")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Jellyfish"], 270), 300, 26, "GREEN")
                 self.objects.append(space)
             elif i == 2: #13
-                space = CommunitySpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(SpecialImages["CommunityChest"], 270))
+                space = CommunitySpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(SpecialImages["CommunityChest"], 270))
                 self.objects.append(space)
             elif i == 3: #14
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Octo"], 270), 320, 28, "GREEN")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Green"]["Octo"], 270), 320, 28, "GREEN")
                 self.objects.append(space)
             elif i == 4: #15
-                space = RailroadSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Railroad"]["DeepBlue"], 270), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
+                space = RailroadSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Railroad"]["DeepBlue"], 270), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
                 self.objects.append(space)
             elif i == 5: #16
-                space = ChanceSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Chance"], 270))
+                space = ChanceSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Chance"], 270))
                 self.objects.append(space)
             elif i == 6: #17
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Blue"]["Cavern"], 270), 400, 50, "BLUE")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Blue"]["Cavern"], 270), 400, 50, "BLUE")
                 self.objects.append(space)
             elif i == 7: #18
-                space = TaxSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Tax"], 270), LUXURY_TAX_PRICE)
+                space = TaxSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Tax"], 270), LUXURY_TAX_PRICE)
                 self.objects.append(space)
             elif i == 8: #19
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Blue"]["Shell"], 270), 350, 35, "BLUE")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Blue"]["Shell"], 270), 350, 35, "BLUE")
                 self.objects.append(space)
             elif i == 9: #20
-                space = GoSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (CornerImages["Go"], 0))
+                space = GoSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (CornerImages["Go"], 0))
                 self.objects.append(space)
 
             y += y_increment
@@ -227,39 +214,39 @@ class GameBoard():
                 width = NORMAL_SPACE_WIDTH
                 x_increment = NORMAL_SPACE_WIDTH
            
-            #space = Space(self.display,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
+            #space = Space(self.buffer,x,y,width,NORMAL_SPACE_HEIGHT,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             x -= x_increment
            
             if i == 0: #21
-                space = StreetSpace(self.display,x+x_increment,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Brown"]["Park"], 0), 60, 6, "BROWN")
+                space = StreetSpace(self.buffer,x+x_increment,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Brown"]["Park"], 0), 60, 6, "BROWN")
                 self.objects.append(space)
             elif i == 1: #22
-                space = CommunitySpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["CommunityChest"], 0))
+                space = CommunitySpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["CommunityChest"], 0))
                 self.objects.append(space)
             elif i == 2: #23
-                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Brown"]["School"], 0), 60, 6, "BROWN")
+                space = StreetSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Brown"]["School"], 0), 60, 6, "BROWN")
                 self.objects.append(space)
             elif i == 3: #24
-                space = TaxSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Tax"], 0), INCOME_TAX_PRICE)
+                space = TaxSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Tax"], 0), INCOME_TAX_PRICE)
                 self.objects.append(space)
             elif i == 4: #25
-                space = RailroadSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Railroad"]["PacificDrive"], 0), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
+                space = RailroadSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Railroad"]["PacificDrive"], 0), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
                 self.objects.append(space)
             elif i == 5: #26
-                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["WiseShell"], 0), 100, 10, "LIGHT_BLUE")
+                space = StreetSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["WiseShell"], 0), 100, 10, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 6: #27
-                space = ChanceSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Chance"], 0))
+                space = ChanceSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["Chance"], 0))
                 self.objects.append(space)
             elif i == 7: #28
-                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["Pollution"], 0), 120, 12, "LIGHT_BLUE")
+                space = StreetSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["Pollution"], 0), 120, 12, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 8: #29
-                space = StreetSpace(self.display,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["HotSpring"], 0), 100, 10, "LIGHT_BLUE")
+                space = StreetSpace(self.buffer,x,y,NORMAL_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (PropertyImages["Teal"]["HotSpring"], 0), 100, 10, "LIGHT_BLUE")
                 self.objects.append(space)
             elif i == 9: #30
-                space = JailSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (CornerImages["InJail"], 0))
+                space = JailSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (CornerImages["InJail"], 0))
                 self.objects.append(space)
        
         #drawing left spaces
@@ -276,41 +263,42 @@ class GameBoard():
                 height = NORMAL_SPACE_WIDTH
                 y_increment = NORMAL_SPACE_WIDTH
            
-            #space = Space(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
+            #space = Space(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR)
             #self.objects.append(space)
             y -= y_increment
            
            
             if i == 0: #31
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Net"], 90), 140, 14, "PINK")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Net"], 90), 140, 14, "PINK")
                 self.objects.append(space)
             elif i == 1: #32
-                space = UtilitySpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Single"]["Electric"], 90),DEFAULT_UTILITY_COST)
+                space = UtilitySpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Single"]["Electric"], 90),DEFAULT_UTILITY_COST)
                 self.objects.append(space)
             elif i == 2: #33
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Throne"], 90), 140, 14, "PINK")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Throne"], 90), 140, 14, "PINK")
                 self.objects.append(space)
             elif i == 3: #34
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Forest"], 90), 160, 16, "PINK")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Pink"]["Forest"], 90), 160, 16, "PINK")
                 self.objects.append(space)
             elif i == 4: #35
-                space = RailroadSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Railroad"]["Abyss"],90), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
+                space = RailroadSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Railroad"]["Abyss"],90), DEFAULT_RAILROAD_COST, DEFAULT_RAILROAD_RENT)
                 self.objects.append(space)
             elif i == 5: #36
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Whirlpool"],90), 200, 20, "ORANGE")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Whirlpool"],90), 200, 20, "ORANGE")
                 self.objects.append(space)
             elif i == 6: #37
-                space = CommunitySpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["CommunityChest"], 90))
+                space = CommunitySpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR, (SpecialImages["CommunityChest"], 90))
                 self.objects.append(space)
             elif i == 7: #38
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Land"], 90), 180, 18, "ORANGE")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Land"], 90), 180, 18, "ORANGE")
                 self.objects.append(space)
             elif i == 8: #39
-                space = StreetSpace(self.display,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Castle"], 90), 180, 18, "ORANGE")
+                space = StreetSpace(self.buffer,x,y,CORNER_SPACE_WIDTH,height,SPACE_BORDER_COLOR,(PropertyImages["Orange"]["Castle"], 90), 180, 18, "ORANGE")
                 self.objects.append(space)
    
     def draw(self):
         for object in self.objects:
             object.draw()
         logo = pygame.transform.scale(SpecialImages["Logo"], (720,720))
-        self.display.blit(logo,(160,140))
+        self.buffer.blit(logo,(160,140))
+        self.display.blit(pygame.transform.scale(self.buffer, self.display.get_rect().size), (0,0))
