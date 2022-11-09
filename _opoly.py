@@ -106,24 +106,36 @@ if __name__ == "__main__":
         buffer.blit(scaled_image,(1040+120,0))
         text_surface_1 = player_font.render('$' + str(players[0].money), False, (255, 255, 255))
         buffer.blit(text_surface_1,(1040+120+200,40))
+        if players[0].jailed:
+            jailed_text_surface_1 = player_font.render('JAILED', False, (255, 0, 0))
+            buffer.blit(jailed_text_surface_1,(1040+120+200+170,40))
         
         player_profile_2 = player_images[1] 
         scaled_image = pygame.transform.scale(player_profile_2, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
         buffer.blit(scaled_image,(1040+120,200))
         text_surface_2 = player_font.render('$' + str(players[1].money), False, (255, 255, 255))
         buffer.blit(text_surface_2,(1040+120+200,230))
+        if players[1].jailed:
+            jailed_text_surface_2 = player_font.render('JAILED', False, (255, 0, 0))
+            buffer.blit(jailed_text_surface_2,(1040+120+200+170,230))
   
         player_profile_3 = player_images[2] 
         scaled_image = pygame.transform.scale(player_profile_3, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
         buffer.blit(scaled_image,(1040+120,400))
         text_surface_3 = player_font.render('$' + str(players[2].money), False, (255, 255, 255))
         buffer.blit(text_surface_3,(1040+120+200,430))
+        if players[2].jailed:
+            jailed_text_surface_3 = player_font.render('JAILED', False, (255, 0, 0))
+            buffer.blit(jailed_text_surface_3,(1040+120+200+170,430))
         
         player_profile_4 = player_images[3] 
         scaled_image = pygame.transform.scale(player_profile_4, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
         buffer.blit(scaled_image,(1040+120,600))
         text_surface_4 = player_font.render('$' + str(players[3].money), False, (255, 255, 255))
         buffer.blit(text_surface_4,(1040+120+200,630))
+        if players[3].jailed:
+            jailed_text_surface_4 = player_font.render('JAILED', False, (255, 0, 0))
+            buffer.blit(jailed_text_surface_4,(1040+120+200+170,630))
 
         
         
@@ -157,7 +169,7 @@ if __name__ == "__main__":
                     print("JAILBREAK! Doubles have been rolled!")
                     player.jailed = False
             else:  
-                clock.tick(0.4)
+                clock.tick(1)
                 player.move((player.position + roll) % 40, game_board.objects)
                 game_board.objects[player.position].action(player) # Space specific action
             
@@ -173,24 +185,36 @@ if __name__ == "__main__":
             buffer.blit(scaled_image,(1040+120,0))
             text_surface_1 = player_font.render('$' + str(players[0].money), False, (255, 255, 255))
             buffer.blit(text_surface_1,(1040+120+200,40))
+            if players[0].jailed:
+                jailed_text_surface_1 = player_font.render('JAILED', False, (255, 0, 0))
+                buffer.blit(jailed_text_surface_1,(1040+120+200+170,40))
             
             player_profile_2 = player_images[1] 
             scaled_image = pygame.transform.scale(player_profile_2, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
             buffer.blit(scaled_image,(1040+120,200))
             text_surface_2 = player_font.render('$' + str(players[1].money), False, (255, 255, 255))
             buffer.blit(text_surface_2,(1040+120+200,230))
+            if players[1].jailed:
+                jailed_text_surface_2 = player_font.render('JAILED', False, (255, 0, 0))
+                buffer.blit(jailed_text_surface_2,(1040+120+200+170,230))
       
             player_profile_3 = player_images[2] 
             scaled_image = pygame.transform.scale(player_profile_3, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
             buffer.blit(scaled_image,(1040+120,400))
             text_surface_2 = player_font.render('$' + str(players[2].money), False, (255, 255, 255))
             buffer.blit(text_surface_2,(1040+120+200,430))
+            if players[2].jailed:
+                jailed_text_surface_3 = player_font.render('JAILED', False, (255, 0, 0))
+                buffer.blit(jailed_text_surface_3,(1040+120+200+170,430))
             
             player_profile_4 = player_images[3] 
             scaled_image = pygame.transform.scale(player_profile_4, (PLAYER_PROFILE_WIDTH, PLAYER_PROFILE_HEIGHT))
             buffer.blit(scaled_image,(1040+120,600))
             text_surface_4 = player_font.render('$' + str(players[3].money), False, (255, 255, 255))
             buffer.blit(text_surface_4,(1040+120+200,630))
+            if players[3].jailed:
+                jailed_text_surface_4 = player_font.render('JAILED', False, (255, 0, 0))
+                buffer.blit(jailed_text_surface_4,(1040+120+200+170,630))
 
             
             display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
