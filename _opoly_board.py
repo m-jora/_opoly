@@ -312,3 +312,5 @@ class GameBoard():
     def draw(self):
         for object in self.objects:
             object.draw()
+        logo = pygame.transform.scale(SpecialImages["Logo"], (720,720))
+        self.display.blit(logo,(160,140))

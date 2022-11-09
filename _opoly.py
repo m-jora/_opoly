@@ -26,20 +26,20 @@ COLOR_BOARD = (100, 100, 100)
 
 
 # Rotating Corners
-CornerImages["Parking"] = pygame.transform.rotate(CornerImages["Parking"], 180)
-CornerImages["GoToJail"] = pygame.transform.rotate(CornerImages["GoToJail"], 90)
-CornerImages["InJail"] = pygame.transform.rotate(CornerImages["InJail"], 315)
+#CornerImages["Parking"] = pygame.transform.rotate(CornerImages["Parking"], 180)
+#CornerImages["GoToJail"] = pygame.transform.rotate(CornerImages["GoToJail"], 90)
+#CornerImages["InJail"] = pygame.transform.rotate(CornerImages["InJail"], 315)
 
 # Scaling Corners
-image_scale(CornerImages)
+#image_scale(CornerImages)
 
 # Scaling Regular Spaces
-image_scale(PropertyImages)
+#image_scale(PropertyImages)
 
 # Scaling Special Spaces
-image_scale(SpecialImages)
+#image_scale(SpecialImages)
 
-prop_image_rotate()
+#prop_image_rotate()
 
 if __name__ == "__main__":
 
