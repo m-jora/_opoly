@@ -1,4 +1,6 @@
 import pygame
+from _opoly_cards import *
+import random
 pygame.init() #initializes pygame elements for use
 
 class Space:
@@ -36,8 +38,8 @@ class StreetSpace(Space):
         
         if self.owner == None:
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
-            player_input = input()
-            if player_input.lower() == 'y':
+            player_input = random.randint(0,1)
+            if player_input == 1:
                 if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
@@ -56,6 +58,7 @@ class StreetSpace(Space):
                 else:
                     print("ACTION: Player pays rent.")
                     player.money -= self.rent
+                    self.owner.money += self.rent
                     
 
 class RailroadSpace(Space):
@@ -70,8 +73,8 @@ class RailroadSpace(Space):
         
         if self.owner == None:
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
-            player_input = input()
-            if player_input.lower() == 'y':
+            player_input = random.randint(0,1)
+            if player_input == 1:
                 if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
@@ -89,6 +92,7 @@ class RailroadSpace(Space):
                 else:
                     print("ACTION: Player pays rent.")
                     player.money -= self.rent
+                    self.owner.money += self.rent
                     
                     
 class UtilitySpace(Space):
@@ -102,8 +106,8 @@ class UtilitySpace(Space):
         
         if self.owner == None:
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
-            player_input = input()
-            if player_input.lower() == 'y':
+            player_input = random.randint(0,1)
+            if player_input == 1:
                 if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
@@ -115,12 +119,13 @@ class UtilitySpace(Space):
             else:
                 print("ACTION: Player must pay rent.")
                 
-                if player.money < self.rent:
+                if player.money < 4*player.last_roll:
                     player.bankrunpt = True
                     print("PLAYER " + str(player.id) + " HAS GONE BANKRUPT")
                 else:
                     print("ACTION: Player pays rent.")
-                    player.money -= self.rent
+                    player.money -= 4*player.last_roll
+                    self.owner.money += 4*player.last_roll
                     
                     
 class TaxSpace(Space):
@@ -132,6 +137,9 @@ class TaxSpace(Space):
     def action(self,player):
         print("ACTION: Player landed on a tax space.")
         player.money -= self.cost
+        
+        if player.money <= 0:
+            player.bankrupt = True
                     
 
 class ChanceSpace(Space):
@@ -141,7 +149,10 @@ class ChanceSpace(Space):
     
     def action(self,player):
         print("ACTION: Player landed on a chance space.")
-        #TO-DO: Pull a card
+        chance_card(player)
+        
+        if player.money <= 0:
+            player.bankrupt = True
         
 class CommunitySpace(Space):
     def __init__(self,display,x,y,width,height,color,image_data):
@@ -150,8 +161,10 @@ class CommunitySpace(Space):
     
     def action(self,player):
         print("ACTION: Player landed on a community space.")
-        #TO-DO: Pull a card
+        community_card(player)
                     
+        if player.money <= 0:
+            player.bankrupt = True
                     
 class JailSpace(Space):
     def __init__(self,display,x,y,width,height,color,image_data):
@@ -159,7 +172,7 @@ class JailSpace(Space):
         self.owner = None
     
     def action(self,player):
-        print("ACTION: Player landed on a jail space.")
+        print("ACTION: Player landed on a jail space (VISITING).")
         #TODO
         
 class GoToJailSpace(Space):
@@ -170,8 +183,13 @@ class GoToJailSpace(Space):
     
     def action(self,player):
         print("ACTION: Player landed on the go-to jail space.")
-        player.jailed = True
-        #TODO -- move player to JAIL space (location-wise)
+        if player.GOJF > 0:
+            print("Get out of jail free-card used! Jail avoided.")
+            player.GOJF -= 1
+        else:
+            player.jailed = True
+            player.move(30, player.board.objects)
+        
         
 class GoSpace(Space):
     def __init__(self,display,x,y,width,height,color,image_data):

@@ -2,12 +2,14 @@ import pygame
 import time
 
 class Player:
-    def __init__(self, id, display, width, height, img):
+    def __init__(self, board, id, display, width, height, img, auto=True):
+        self.board = board
         self.id = id
         self.display = display
         self.width = width
         self.height = height
         self.image = img
+        self.auto = auto
                 
         self.money = 1500
         self.position = 20
@@ -15,11 +17,11 @@ class Player:
         self.bankrupt = False
         self.steal_chance = 0.5  # 50% chance default; could be changed
         self.last_roll = None
+        self.GOJF = 0
 
     
     def move(self,space_index,spaces,initial=False):
         if not initial:
-            print("Removing player from old space.")
             spaces[self.position].players -= 1
             
         players = spaces[space_index].players
@@ -39,9 +41,11 @@ class Player:
             self.y = space.y + self.height
         
         if (space_index > 20) and (self.position < 20):
+            print("Player ", self.id, " passed go!")
             self.money += 200
         self.position = space_index
         space.players += 1
+        print("Player ", self.id, " is now on space ", self.position)
     
         #print("CURRENT POSITION: ", self.position)
         #print(self.x, self.y)
