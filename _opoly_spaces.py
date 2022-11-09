@@ -2,7 +2,7 @@ import pygame
 pygame.init() #initializes pygame elements for use
 
 class Space:
-    def __init__(self,display,x,y,width,height,color):
+    def __init__(self,display,x,y,width,height,color,image_data):
         self.display = display
         self.x = x
         self.y = y
@@ -10,16 +10,24 @@ class Space:
         self.height = height
         self.color = color
         self.topleft = ''
-
+        
+        self.image = image_data[0]
+        self.image_rotation = image_data[1]
+        
+        pygame.transform.rotate(self.image, self.image_rotation)
 
     def draw(self):
         shape = pygame.Rect(self.x, self.y, self.width, self.height)
         self.topleft = shape.topleft
         visual = pygame.draw.rect(self.display,self.color,shape,3)
+        pygame.transform.scale(self.image_data[0], self.x, self.y)
+        
+        
+        
 
 class StreetSpace(Space):
-    def __init__(self,display,x,y,width,height,color,cost,rent,color_group):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data,cost,rent,color_group):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
         self.cost = cost
         self.rent = rent
@@ -51,8 +59,8 @@ class StreetSpace(Space):
                     
 
 class RailroadSpace(Space):
-    def __init__(self,display,x,y,width,height,color,cost,rent):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data,cost,rent):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
         self.cost = cost
         self.rent = rent
@@ -84,8 +92,8 @@ class RailroadSpace(Space):
                     
                     
 class UtilitySpace(Space):
-    def __init__(self,display,x,y,width,height,color,cost):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data,cost):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
         self.cost = cost
     
@@ -116,8 +124,8 @@ class UtilitySpace(Space):
                     
                     
 class TaxSpace(Space):
-    def __init__(self,display,x,y,width,height,color,price):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data,price):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
         self.price = price
     
@@ -148,8 +156,8 @@ class TaxSpace(Space):
                     
 
 class ChanceSpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
     
     def action(self,player):
@@ -157,8 +165,8 @@ class ChanceSpace(Space):
         #TO-DO: Pull a card
         
 class CommunitySpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
     
     def action(self,player):
@@ -167,8 +175,8 @@ class CommunitySpace(Space):
                     
                     
 class JailSpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
     
     def action(self,player):
@@ -176,8 +184,8 @@ class JailSpace(Space):
         #TODO
         
 class GoToJailSpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
 
     
@@ -187,8 +195,8 @@ class GoToJailSpace(Space):
         #TODO -- move player to JAIL space (location-wise)
         
 class GoSpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
     
     def action(self,player):
@@ -197,8 +205,8 @@ class GoSpace(Space):
         #TODO--need to ensure PASSING go also gives money
 
 class FreeParkingSpace(Space):
-    def __init__(self,display,x,y,width,height,color):
-        super().__init__(display,x,y,width,height,color)
+    def __init__(self,display,x,y,width,height,color,image_data):
+        super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
     
     def action(self,player):
