@@ -301,4 +301,3 @@ class GameBoard():
             object.draw()
         logo = pygame.transform.scale(SpecialImages["Logo"], (720,720))
         self.buffer.blit(logo,(160,140))
-        self.display.blit(pygame.transform.scale(self.buffer, self.display.get_rect().size), (0,0))

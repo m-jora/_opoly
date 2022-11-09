@@ -14,14 +14,14 @@ class Space:
         self.image_rotation = image_data[1]
         
         self.image = pygame.transform.rotate(self.image, self.image_rotation)
+        self.players = 0
 
     def draw(self):
         self.shape = pygame.Rect(self.x, self.y, self.width, self.height)
         visual = pygame.draw.rect(self.display,self.color,self.shape,3)
         scaled_image = pygame.transform.scale(self.image, (self.width, self.height))
         self.display.blit(scaled_image,self.shape)
-        
-        
+    
         
 
 class StreetSpace(Space):
