@@ -1,4 +1,6 @@
 import pygame
+import time
+
 class Player:
     def __init__(self, id, display, width, height, img):
         self.id = id
@@ -12,9 +14,14 @@ class Player:
         self.jailed = False
         self.bankrupt = False
         self.steal_chance = 0.5  # 50% chance default; could be changed
+        self.last_roll = None
 
     
-    def move(self,space_index,spaces):
+    def move(self,space_index,spaces,initial=False):
+        if not initial:
+            print("Removing player from old space.")
+            spaces[self.position].players -= 1
+            
         players = spaces[space_index].players
         space = spaces[space_index]
         
@@ -22,23 +29,36 @@ class Player:
             self.x = space.x
             self.y = space.y
         elif players == 1:
-            self.x = space.x + player.width
+            self.x = space.x + self.width
             self.y = space.y
         elif players == 2:
             self.x = space.x
-            self.y = space.y + player.height
+            self.y = space.y + self.height
         else:
-            self.x = space.x + player.width
-            self.y = space.y + player_height
+            self.x = space.x + self.width
+            self.y = space.y + self.height
         
+        if (space_index > 20) and (self.position < 20):
+            self.money += 200
         self.position = space_index
+        space.players += 1
     
-        print("CURRENT POSITION: ", self.position)
-        print(self.x, self.y)
+        #print("CURRENT POSITION: ", self.position)
+        #print(self.x, self.y)
+    
+    """
+    def walk(self,roll,spaces):
+        while roll > 0:
+            print("CURRENTLY @ ", self.position)
+            print("WALKING TO: ", (self.position + 1) % 39)
+            self.move((self.position+1)%39,spaces)
+            pygame.time.wait(500)
+            roll -= 1
+    """
     
     def draw(self):
         #self.shape = pygame.Rect(self.x, self.y, self.width, self.height)
-        #visual = pygame.draw.rect(self.display,(255,255,255),self.shape)
+        #visual = pygame.draw.rect(self.display,self.color,self.shape)
         scaled_image = pygame.transform.scale(self.image, (self.width, self.height))
         self.display.blit(scaled_image,(self.x,self.y))
 

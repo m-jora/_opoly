@@ -38,11 +38,12 @@ class StreetSpace(Space):
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
             player_input = input()
             if player_input.lower() == 'y':
-                if player.money >= player.cost:
+                if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
                 else:
                     print("INSUFFICIENT FUNDS.")
+                    player.bankrupt = True
         else:
             if self.owner.id == player.id:
                 pass
@@ -71,7 +72,7 @@ class RailroadSpace(Space):
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
             player_input = input()
             if player_input.lower() == 'y':
-                if player.money >= player.cost:
+                if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
                 else:
@@ -103,7 +104,7 @@ class UtilitySpace(Space):
             print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
             player_input = input()
             if player_input.lower() == 'y':
-                if player.money >= player.cost:
+                if player.money >= self.cost:
                     self.owner = player
                     player.money -= self.cost
                 else:
@@ -123,35 +124,14 @@ class UtilitySpace(Space):
                     
                     
 class TaxSpace(Space):
-    def __init__(self,display,x,y,width,height,color,image_data,price):
+    def __init__(self,display,x,y,width,height,color,image_data,cost):
         super().__init__(display,x,y,width,height,color,image_data)
         self.owner = None
-        self.price = price
+        self.cost = cost
     
     def action(self,player):
         print("ACTION: Player landed on a tax space.")
-        
-        if self.owner == None:
-            print("COST: " + str(self.cost) +"\nBuy space? (Y/N)")
-            player_input = input()
-            if player_input.lower() == 'y':
-                if player.money >= player.cost:
-                    self.owner = player
-                    player.money -= self.cost
-                else:
-                    print("INSUFFICIENT FUNDS.")
-        else:
-            if self.owner.id == player.id:
-                pass
-            else:
-                print("ACTION: Player must pay rent.")
-                
-                if player.money < self.rent:
-                    player.bankrunpt = True
-                    print("PLAYER " + str(player.id) + " HAS GONE BANKRUPT")
-                else:
-                    print("ACTION: Player pays rent.")
-                    player.money -= self.rent
+        player.money -= self.cost
                     
 
 class ChanceSpace(Space):

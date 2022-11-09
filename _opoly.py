@@ -40,28 +40,39 @@ if __name__ == "__main__":
     for i in range(player_count):
         player = Player(i, buffer, 50, 50, player_images[i])
         players.append(player)
-        players[i].move(21, game_board.objects)
+        players[i].move(20, game_board.objects, True)
     print("Players created.")
-    #players[0].move(23,game_board.objects)
+    #players[1].move(31,game_board.objects)
+    #players[2].move(31,game_board.objects)
+    #players[3].move(31,game_board.objects)
     
+    # Drawing objects (ORDER MATTERS)
+    buffer.fill(COLOR_BOARD)
+    game_board.draw()
+    
+    for player in players:
+        player.draw()
+        
+    display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
+    pygame.display.update()
     while gameIsRunning:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameIsRunning = False
         # end event handler
-
+        
+        
         # Drawing objects (ORDER MATTERS)
         buffer.fill(COLOR_BOARD)
         game_board.draw()
+        
         for player in players:
             player.draw()
-        display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0))
+            
+        display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
         pygame.display.update()
-
         
-        """
         for player in players:
-
             if len(players) == 1: # One player remaining
                 print("One player remaining; ending game...")
                 time.sleep(3)
@@ -73,13 +84,28 @@ if __name__ == "__main__":
                 print(player.name, "is now bankrupt and out of the game.")
                 time.sleep(3)
                 continue
-
+            
             roll = random.randint(2, 12)
-            player.position = (player.position + roll) % len(board_list)
+            player.last_roll = roll
+            player.move((player.position + roll) % 40, game_board.objects)
+            
+            buffer.fill(COLOR_BOARD)
+            game_board.draw()
+        
+            for player in players:
+                player.draw()
+            
+            display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
+            pygame.display.update()
+            
             print("Player " + str(player.id) + " has rolled a", roll)
-            time.sleep(1)
-
-            board_list[player.position].action(player) # Space specific action
+            #time.sleep(1)
+            #game_board.draw()
+            #player.draw()
+            clock.tick(0.4)
+            game_board.objects[player.position].action(player) # Space specific action
+            
+            
 
             # check for passed players
                 # try to steal by default
@@ -89,6 +115,5 @@ if __name__ == "__main__":
                 players.remove(player)
                 print(player.name, "is now bankrupt and out of the game.")
                 time.sleep(3)
-        """
 
     print("END MAIN")
