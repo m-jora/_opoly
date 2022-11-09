@@ -103,6 +103,8 @@ if __name__ == "__main__":
                     if player.position == p.position:
                         player.steal(p)
             
+            player.steal_chance = 0.5
+            
             print("Player " + str(player.id) + " has rolled a", roll)
             #time.sleep(1)
             #game_board.draw()
