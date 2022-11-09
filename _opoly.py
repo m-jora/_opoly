@@ -99,7 +99,7 @@ if __name__ == "__main__":
             pygame.display.update()
             
             for p in players:
-                if player.name != p.name:
+                if player.id != p.id:
                     if player.position == p.position:
                         player.steal(p)
             
