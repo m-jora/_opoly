@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 class Player:
     def __init__(self, id, display, width, height, img):
@@ -55,6 +56,15 @@ class Player:
             pygame.time.wait(500)
             roll -= 1
     """
+    
+    def steal(self, player):
+        steal_roll = random.random()
+        if self.steal_chance <= steal_roll:
+            self.money += 100
+            player.money -= 100
+        else:
+            self.jailed = True
+            self.position = 30
     
     def draw(self):
         self.shape = pygame.Rect(self.x, self.y, self.width, self.height)

@@ -71,7 +71,7 @@ if __name__ == "__main__":
             
         display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
         pygame.display.update()
-        """
+        
         for player in players:
             if len(players) == 1: # One player remaining
                 print("One player remaining; ending game...")
@@ -98,6 +98,11 @@ if __name__ == "__main__":
             display.blit(pygame.transform.scale(buffer, display.get_rect().size), (0,0)) #displaying buffer screen that allows window to be changed
             pygame.display.update()
             
+            for p in players:
+                if player.name != p.name:
+                    if player.position == p.position:
+                        player.steal(p)
+            
             print("Player " + str(player.id) + " has rolled a", roll)
             #time.sleep(1)
             #game_board.draw()
@@ -107,13 +112,9 @@ if __name__ == "__main__":
         
             
 
-            # check for passed players
-                # try to steal by default
-            # reset steal chance to 50%
-
             if player.bankrupt:  # Bankruptcy check
                 players.remove(player)
                 print(player.name, "is now bankrupt and out of the game.")
                 time.sleep(3)
-        """
+        
     print("END MAIN")
